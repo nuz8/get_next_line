@@ -6,7 +6,7 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:37:49 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 17:02:12 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/03 17:24:23 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ char	*extract_rest(char *next_line, char *buffer, int fd)
 		buffer[bytes_read] = '\0';
 		line_part = copy_n_shift(buffer);
 		if (!line_part)
-			return (NULL);
-		joined_line = f_strjoin(next_line, line_part);
+			return (free(next_line), NULL);
+		joined_line = join_parts(next_line, line_part);
 		if (!joined_line)
-			return (NULL);
+			return (free(next_line), free(line_part), NULL);
 		next_line = joined_line;
 	}
 	return (next_line);

@@ -6,7 +6,7 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:34:09 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 16:58:01 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/03 17:11:50 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	f_strlen(const char *str);								//
 size_t line_length(char *str);
-char	*f_strjoin(char *s1, char *s2);
+char	*join_parts(char *s1, char *s2);
 
 // Conventional strlen function
 size_t	f_strlen(const char *str)								//
@@ -48,7 +48,7 @@ size_t	line_length(char *str)
 }
 
 // Function to join two strings by allocating with malloc
-char	*f_strjoin(char *s1, char *s2)
+char	*join_parts(char *s1, char *s2)
 {
 	char	*joined_str;
 	size_t	len;

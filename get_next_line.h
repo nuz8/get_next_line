@@ -26,7 +26,7 @@ char	*copy_n_shift(char *buffer);
 
 size_t	f_strlen(const char *str);
 size_t	line_length(char *str);
-char	*f_strjoin(char *s1, char *s2);
+char	*join_parts(char *s1, char *s2);
 
 
 #endif

@@ -20,13 +20,13 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-# define BUFFER_SIZE 7
+# define BUFFER_SIZE 10
 
 char	*get_next_line(int fd);
 
-int		write_next(char *buffer, char *store);
+int		write_n_shift(char *buffer, char *store, int line_len);
 
-size_t	f_strlen(const char *str);								//
+size_t	f_strlen(const char *str);
 int		line_length(char *str);
 char	*f_strjoin(char const *s1, char const *s2);
 

@@ -20,7 +20,7 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 2
 
 char	*get_next_line(int fd);
 

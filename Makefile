@@ -6,7 +6,7 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/03 14:09:21 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/03 16:01:16 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ lib: re
 
 now:
 	$(CC) $(CFLAGS) $(NAME) $(CURRENT).c -o $(CURRENT)
-	./$(CURRENT) | tr -d '\r' | cat -e
+	./$(CURRENT)
 
 both: lib now
 

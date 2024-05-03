@@ -6,7 +6,7 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:37:49 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 15:52:28 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/03 15:58:46 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*get_next_line(int fd)
 	if (!next_line)
 		return (NULL);
 	write_n_shift(buffer, next_line, line_len);
-	if (next_line[line_length(next_line) - 1] != '\n')
+	while (next_line[line_length(next_line) - 1] != '\n')
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE - 1);
 		if (bytes_read < 0)

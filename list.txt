@@ -1,0 +1,7 @@
+total 4
+drwxrwxrwx 1 pranuj pranuj 512 Apr 17 14:48 .
+drwxrwxrwx 1 pranuj pranuj 512 Apr 17 14:47 ..
+-rwxrwxrwx 1 pranuj pranuj 892 Apr 17 14:47 get_next_line.c
+-rwxrwxrwx 1 pranuj pranuj   0 Apr 17 14:39 get_next_line.h
+-rwxrwxrwx 1 pranuj pranuj   0 Apr 17 14:36 get_next_line_utils.c
+-rwxrwxrwx 1 pranuj pranuj   0 Apr 17 14:48 list.txt

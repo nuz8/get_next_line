@@ -6,7 +6,7 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:07:26 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 16:02:17 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/03 17:07:19 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(void)
 	int		loop;
 	
 	loop = 5;
-	fd = open("file1.txt", O_RDONLY);
+	fd = open("file0.txt", O_RDONLY);
 	while (loop--)
 	{
 		line = get_next_line(fd);

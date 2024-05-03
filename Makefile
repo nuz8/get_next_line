@@ -6,7 +6,7 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/03 16:01:16 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/03 17:05:08 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,15 +23,16 @@ SRCS	=	get_next_line.c get_next_line_utils.c
 OBJS	=	$(SRCS:.c=.o)
 
 CURRENT	=	test_main
+BUG		=	bug
 
 all: $(NAME)
 
-# $(NAME): $(OBJS) $(FT)
-# 	cp ./$(FTDIR)/$(FT) ./$(NAME)
-# 	ar rcs $(NAME) $(OBJS)
-
 $(NAME): $(OBJS)
+	cp ./$(FTDIR)/$(FT) ./$(NAME)
 	ar rcs $(NAME) $(OBJS)
+
+# $(NAME): $(OBJS)
+# 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -63,7 +64,15 @@ both: lib now
 clr: fclean
 	$(RM) $(CURRENT).o
 	$(RM) $(CURRENT)
+	$(RM) $(BUG)
+	$(RM) a.out
+	$(RM) -R ./*.dSYM
+
+clb:
+	$(RM) $(BUG)
+
+bug: clb
+	$(CC) $(CFLAGS) $(CURRENT).c $(SRCS) ./$(FTDIR)/$(FT) -o $(BUG) -g
 
 
-
-.PHONY: all clean fclean re lib now both clr
+.PHONY: all clean fclean re lib now both clr clb bug

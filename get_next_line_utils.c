@@ -6,15 +6,15 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:34:09 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 15:52:30 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/03 16:58:01 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 size_t	f_strlen(const char *str);								//
-int		line_length(char *str);
-char	*f_strjoin(char const *s1, char const *s2);
+size_t line_length(char *str);
+char	*f_strjoin(char *s1, char *s2);
 
 // Conventional strlen function
 size_t	f_strlen(const char *str)								//
@@ -30,11 +30,13 @@ size_t	f_strlen(const char *str)								//
 // Modified strlen function:
 // Function to get the length of the string terminated by \n or \0, whichever
 // occurs first, also counting the \n character if it occurs within the count.
-int line_length(char *str)
+size_t	line_length(char *str)
 {
 	int	i;
 
 	i = 0;
+	if (!str)
+		return (0);
 	while (*str && *str != '\n')
 	{
 		i++;
@@ -46,25 +48,29 @@ int line_length(char *str)
 }
 
 // Function to join two strings by allocating with malloc
-char	*f_strjoin(char const *s1, char const *s2)
+char	*f_strjoin(char *s1, char *s2)
 {
-	char	*j_str;
+	char	*joined_str;
 	size_t	len;
 	size_t	i;
+	char	*s2_ptr;
 
-	len = f_strlen(s1) + f_strlen(s2);
-	j_str = (char *)malloc((len + 1) * sizeof(char));
-	if (!j_str)
+	len = line_length(s1) + line_length(s2);
+	joined_str = (char *)malloc((len + 1) * sizeof(char));
+	if (!joined_str)
 		return (NULL);
 	i = 0;
+	s2_ptr = s2;
 	while (i < len)
 	{
-		if (i < f_strlen(s1))
-			j_str[i] = s1[i];
+		if (i < line_length(s1))
+			joined_str[i] = s1[i];
 		else
-			j_str[i] = *s2++;
+			joined_str[i] = *s2++;
 		i++;
 	}
-	j_str[i] = '\0';
-	return (j_str);
+	joined_str[i] = '\0';
+	free(s1);
+	free(s2_ptr);
+	return (joined_str);
 }

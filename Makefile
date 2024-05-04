@@ -6,7 +6,7 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/03 17:05:08 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/04 15:06:17 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,26 +26,29 @@ CURRENT	=	test_main
 BUG		=	bug
 
 all: $(NAME)
+	@echo "Executed make all"
 
 $(NAME): $(OBJS)
-	cp ./$(FTDIR)/$(FT) ./$(NAME)
-	ar rcs $(NAME) $(OBJS)
+	@cp ./$(FTDIR)/$(FT) ./$(NAME)
+	@ar rcs $(NAME) $(OBJS)
 
 # $(NAME): $(OBJS)
 # 	ar rcs $(NAME) $(OBJS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 # $(FT):
 # 	$(MAKE) -C $(FTDIR) all
 
 clean:
-	$(RM) $(OBJS)
+	@$(RM) $(OBJS)
+
 # $(MAKE) -C $(FTDIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	
 # $(MAKE) -C $(FTDIR) fclean
 
 re: fclean all
@@ -53,11 +56,11 @@ re: fclean all
 
 
 lib: re
-	$(MAKE) clean
+	@$(MAKE) clean
 
 now:
-	$(CC) $(CFLAGS) $(NAME) $(CURRENT).c -o $(CURRENT)
-	./$(CURRENT)
+	@$(CC) $(CFLAGS) $(NAME) $(CURRENT).c -o $(CURRENT)
+	@./$(CURRENT)
 
 both: lib now
 

@@ -6,13 +6,13 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:37:49 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 17:24:23 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/04 15:50:57 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-# define BUFFER_SIZE 2
+# define BUFFER_SIZE 10
 
 char	*copy_n_shift(char *buffer);
 char	*get_next_line(int fd);
@@ -68,7 +68,7 @@ char	*extract_rest(char *next_line, char *buffer, int fd)
 	char	*line_part;
 	char	*joined_line;
 	
-	while (next_line[line_length(next_line) - 1] != '\n')
+	while (next_line[line_length(next_line) - 1] != '\n')	// Reviewed this as (next_line[line_length(next_line)] != '\n') and it fails because it only ever finds \0 at that index
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE - 1);
 		if (bytes_read < 0)
@@ -103,7 +103,7 @@ char	*get_next_line(int fd)
 	next_line = copy_n_shift(buffer);
 	if (!next_line)
 		return (NULL);
-	if (next_line[line_length(next_line) - 1] != '\n')		// Review this as (next_line[line_length(next_line)] != '\n')
+	if (next_line[line_length(next_line) - 1] != '\n')		// Reviewed this as (next_line[line_length(next_line)] != '\n') and it fails because it only ever finds \0 at that index
 	{
 		joined_line = extract_rest(next_line, buffer, fd);
 		if (!joined_line)

@@ -17,8 +17,11 @@
 # include <stdlib.h>
 
 # include "./Libft/libft.h"
-#include <fcntl.h>
-#include <stdio.h>
+# include <fcntl.h>
+# include <stdio.h>
+# ifndef BUFFER_SIZE
+#	define BUFFER_SIZE 50
+# endif
 
 char	*get_next_line(int fd);
 

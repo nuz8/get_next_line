@@ -6,7 +6,7 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/04 15:06:17 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/04 16:15:45 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ CURRENT	=	test_main
 BUG		=	bug
 
 all: $(NAME)
-	@echo "Executed make all"
+	@echo ">>Executed make all"
 
 $(NAME): $(OBJS)
 	@cp ./$(FTDIR)/$(FT) ./$(NAME)

@@ -6,17 +6,33 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:37:49 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/04 15:58:51 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/04 19:57:52 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-# define BUFFER_SIZE 10
-
 char	*copy_n_shift(char *buffer);
 char	*extract_rest(char *next_line, char *buffer, int fd);
 char	*get_next_line(int fd);
+int		has_next_line(char *str);
+
+int	has_next_line(char *str)
+{
+	int	has_nl;
+
+	has_nl = 0;
+	while (*str)
+	{
+		if (*str == '\n')
+		{
+			has_nl = 1;
+			break;
+		}
+		str++;
+	}
+	return (has_nl);
+}
 
 // // Function to write the contents of the buffer to the store, shift the rest
 // // of the buffer storage to the beginning, and return the the number of
@@ -71,12 +87,12 @@ char	*extract_rest(char *next_line, char *buffer, int fd)
 	
 	while (next_line[line_length(next_line) - 1] != '\n')	// Reviewed this as (next_line[line_length(next_line)] != '\n') and it fails because it only ever finds \0 at that index
 	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE - 1);
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 			return (free(next_line), NULL);
 		else if (bytes_read == 0)
 			return (next_line);
-		buffer[bytes_read] = '\0';
+		buffer[bytes_read + 1] = '\0';
 		line_part = copy_n_shift(buffer);
 		if (!line_part)
 			return (free(next_line), NULL);
@@ -92,15 +108,18 @@ char	*extract_rest(char *next_line, char *buffer, int fd)
 char	*get_next_line(int fd)
 {
 	ssize_t		bytes_read;
-	static char	buffer[BUFFER_SIZE];
+	static char	buffer[BUFFER_SIZE + 1];
 	char		*next_line;
 	char		*joined_line;
+	// char		*store;
 
-	next_line = NULL;
-	bytes_read = read(fd, buffer, BUFFER_SIZE - 1);
-	if (bytes_read <= 0)
-		return (NULL);
-	buffer[bytes_read] = '\0';
+	if (!*buffer && !has_next_line(buffer))
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read <= 0)
+			return (NULL);
+		buffer[bytes_read + 1] = '\0';
+	}
 	next_line = copy_n_shift(buffer);
 	if (!next_line)
 		return (NULL);
@@ -114,3 +133,4 @@ char	*get_next_line(int fd)
 	}
 	return (next_line);
 }
+

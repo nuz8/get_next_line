@@ -20,11 +20,12 @@
 # include <fcntl.h>
 # include <stdio.h>
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 50
+#	define BUFFER_SIZE 100
 # endif
 
 char	*get_next_line(int fd);
 
+int		has_next_line(char *str);
 char	*copy_n_shift(char *buffer);
 char	*extract_rest(char *next_line, char *buffer, int fd);
 

@@ -6,26 +6,26 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:34:09 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/03 17:11:50 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/04 22:21:20 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	f_strlen(const char *str);								//
-size_t line_length(char *str);
+// size_t	f_strlen(const char *str);								//
+size_t	line_length(char *str);
 char	*join_parts(char *s1, char *s2);
 
-// Conventional strlen function
-size_t	f_strlen(const char *str)								//
-{
-	size_t	len;
+// // Conventional strlen function
+// size_t	f_strlen(const char *str)								//
+// {
+// 	size_t	len;
 
-	len = 0;
-	while (*str++)
-		len++;
-	return (len);
-}
+// 	len = 0;
+// 	while (*str++)
+// 		len++;
+// 	return (len);
+// }
 
 // Modified strlen function:
 // Function to get the length of the string terminated by \n or \0, whichever
@@ -51,26 +51,26 @@ size_t	line_length(char *str)
 char	*join_parts(char *s1, char *s2)
 {
 	char	*joined_str;
+	char	*ptr[2];
+	size_t	str_len[2];
 	size_t	len;
 	size_t	i;
-	char	*s2_ptr;
 
-	len = line_length(s1) + line_length(s2);
+	str_len[0] = line_length(s1);
+	str_len[1] = line_length(s2);
+	len = str_len[0] + str_len[1];
 	joined_str = (char *)malloc((len + 1) * sizeof(char));
 	if (!joined_str)
 		return (NULL);
 	i = 0;
-	s2_ptr = s2;
-	while (i < len)
-	{
-		if (i < line_length(s1))
-			joined_str[i] = s1[i];
-		else
-			joined_str[i] = *s2++;
-		i++;
-	}
+	ptr[0] = s1;
+	ptr[1] = s2;
+	while (i < str_len[0])
+		joined_str[i++] = *s1++;
+	while (i >= str_len[0] && i < len)
+		joined_str[i++] = *s2++;
 	joined_str[i] = '\0';
-	free(s1);
-	free(s2_ptr);
+	free(ptr[0]);
+	free(ptr[1]);
 	return (joined_str);
 }

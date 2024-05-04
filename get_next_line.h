@@ -23,6 +23,7 @@
 char	*get_next_line(int fd);
 
 char	*copy_n_shift(char *buffer);
+char	*extract_rest(char *next_line, char *buffer, int fd);
 
 size_t	f_strlen(const char *str);
 size_t	line_length(char *str);

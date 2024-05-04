@@ -6,7 +6,7 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 14:37:49 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/04 15:50:57 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/04 15:58:51 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define BUFFER_SIZE 10
 
 char	*copy_n_shift(char *buffer);
+char	*extract_rest(char *next_line, char *buffer, int fd);
 char	*get_next_line(int fd);
 
 // // Function to write the contents of the buffer to the store, shift the rest
@@ -108,7 +109,7 @@ char	*get_next_line(int fd)
 		joined_line = extract_rest(next_line, buffer, fd);
 		if (!joined_line)
 			return (NULL);
-		// free(next_line);
+		// free(next_line);		// As the functions are set up now, don't need to free it here as next_line pointer at this point is already freed by join_parts fn
 		next_line = joined_line;
 	}
 	return (next_line);

@@ -6,15 +6,33 @@
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:34:09 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/04 22:21:20 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/05 20:52:11 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+void	*ft_calloc(size_t count, size_t size);
 // size_t	f_strlen(const char *str);								//
 size_t	line_length(char *str);
 char	*join_parts(char *s1, char *s2);
+
+// Calloc function from Libft, but commented as GNL-makefile is already including Libft
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+	char	*wrt;
+	size_t	byts;
+
+	byts = count * size;
+	ptr = malloc(byts);
+	if (!ptr)
+		return (NULL);
+	wrt = (char *)ptr;
+	while (byts--)
+		*wrt++ = '\0';
+	return (ptr);
+}
 
 // // Conventional strlen function
 // size_t	f_strlen(const char *str)								//
@@ -51,7 +69,7 @@ size_t	line_length(char *str)
 char	*join_parts(char *s1, char *s2)
 {
 	char	*joined_str;
-	char	*ptr[2];
+	char	*str_ptr[2];
 	size_t	str_len[2];
 	size_t	len;
 	size_t	i;
@@ -63,14 +81,14 @@ char	*join_parts(char *s1, char *s2)
 	if (!joined_str)
 		return (NULL);
 	i = 0;
-	ptr[0] = s1;
-	ptr[1] = s2;
+	str_ptr[0] = s1;
+	str_ptr[1] = s2;
 	while (i < str_len[0])
 		joined_str[i++] = *s1++;
 	while (i >= str_len[0] && i < len)
 		joined_str[i++] = *s2++;
 	joined_str[i] = '\0';
-	free(ptr[0]);
-	free(ptr[1]);
+	free(str_ptr[0]);
+	free(str_ptr[1]);
 	return (joined_str);
 }

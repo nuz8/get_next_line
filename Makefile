@@ -6,12 +6,13 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/04 16:15:45 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/05 23:53:00 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		=	cc
-CFLAGS	=	-Wall -Wextra -Werror
+# CFLAGS	=	-Wall -Wextra -Werror
+CFLAGS	=	-Wall -Wextra -Werror -D BUFFER_SIZE=42
 RM		=	rm -f
 
 NAME	=	gnl.a
@@ -28,8 +29,11 @@ BUG		=	bug
 all: $(NAME)
 	@echo ">>Executed make all"
 
+# $(NAME): $(OBJS)
+# 	@cp ./$(FTDIR)/$(FT) ./$(NAME)
+# 	@ar rcs $(NAME) $(OBJS)
+
 $(NAME): $(OBJS)
-	@cp ./$(FTDIR)/$(FT) ./$(NAME)
 	@ar rcs $(NAME) $(OBJS)
 
 # $(NAME): $(OBJS)
@@ -59,7 +63,7 @@ lib: re
 	@$(MAKE) clean
 
 now:
-	@$(CC) $(CFLAGS) $(NAME) $(CURRENT).c -o $(CURRENT)
+	$(CC) $(CFLAGS) $(NAME) $(CURRENT).c -o $(CURRENT)
 	@./$(CURRENT)
 
 both: lib now

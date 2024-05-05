@@ -20,16 +20,17 @@
 # include <fcntl.h>
 # include <stdio.h>
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 100
+#	define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);
 
-int		has_next_line(char *str);
+int		has_new_line(char *str);
 char	*copy_n_shift(char *buffer);
 char	*extract_rest(char *next_line, char *buffer, int fd);
 
-size_t	f_strlen(const char *str);
+void	*ft_calloc(size_t count, size_t size);
+// size_t	f_strlen(const char *str);
 size_t	line_length(char *str);
 char	*join_parts(char *s1, char *s2);
 

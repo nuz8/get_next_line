@@ -6,7 +6,7 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/05 23:53:00 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/07 18:34:18 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,12 +16,15 @@ CFLAGS	=	-Wall -Wextra -Werror -D BUFFER_SIZE=42
 RM		=	rm -f
 
 NAME	=	gnl.a
+BONUS	=	gnl_bonus.a
 FTDIR	=	Libft
 FT		=	libft.a
 UTIL	=	./Utilities
 
 SRCS	=	get_next_line.c get_next_line_utils.c
+SRC_BON	=	get_next_line_bonus.c get_next_line_utils_bonus.c
 OBJS	=	$(SRCS:.c=.o)
+OBJ_BON	=	$(SRC_BON:.c=.o)
 
 CURRENT	=	test_main
 BUG		=	bug
@@ -36,22 +39,32 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@ar rcs $(NAME) $(OBJS)
 
-# $(NAME): $(OBJS)
+# $(NAME): $(OBJS) $(FT)
 # 	ar rcs $(NAME) $(OBJS)
-
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
 
 # $(FT):
 # 	$(MAKE) -C $(FTDIR) all
 
+# bonus: $(BONUS)
+# 	@echo ">>Executed make all"
+# 	$(CC) $(CFLAGS) $(BONUS) $(CURRENT).c -o $(CURRENT)_bonus
+# 	@./$(CURRENT)_bonus
+
+# $(BONUS): $(OBJ_BON)
+# 	@ar rcs $(BONUS) $(OBJ_BON)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
 	@$(RM) $(OBJS)
+	@$(RM) $(OBJ_BON)
 
 # $(MAKE) -C $(FTDIR) clean
 
 fclean: clean
 	@$(RM) $(NAME)
+	@$(RM) $(BONUS)
 	
 # $(MAKE) -C $(FTDIR) fclean
 
@@ -71,6 +84,7 @@ both: lib now
 clr: fclean
 	$(RM) $(CURRENT).o
 	$(RM) $(CURRENT)
+	$(RM) $(CURRENT)_bonus
 	$(RM) $(BUG)
 	$(RM) a.out
 	$(RM) -R ./*.dSYM

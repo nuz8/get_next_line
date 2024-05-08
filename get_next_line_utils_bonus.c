@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 16:34:09 by pamatya           #+#    #+#             */
-/*   Updated: 2024/05/08 14:47:12 by pamatya          ###   ########.fr       */
+/*   Updated: 2024/05/08 14:35:22 by pamatya          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-// void	*ft_calloc(size_t count, size_t size);
+void	*ft_calloc(size_t count, size_t size);
 // int		has_new_line(char *str);
 size_t	line_length(char *str);
 char	*join_parts(char *s1, char *s2);
 char	*copy_n_shift(char *buffer);
 char	*extract_rest(char *next_line, char *buffer, int fd);
 
-// // Calloc function from Libft, but commented as GNL-makefile is already including Libft
-// void	*ft_calloc(size_t count, size_t size)
-// {
-// 	void	*ptr;
-// 	char	*wrt;
-// 	size_t	byts;
+// Calloc function from Libft, but commented as GNL-makefile is already including Libft
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*ptr;
+	char	*wrt;
+	size_t	byts;
 
-// 	byts = count * size;
-// 	ptr = malloc(byts);
-// 	if (!ptr)
-// 		return (NULL);
-// 	wrt = (char *)ptr;
-// 	while (byts--)
-// 		*wrt++ = '\0';
-// 	return (ptr);
-// }
+	byts = count * size;
+	ptr = malloc(byts);
+	if (!ptr)
+		return (NULL);
+	wrt = (char *)ptr;
+	while (byts--)
+		*wrt++ = '\0';
+	return (ptr);
+}
 
 // // Function to check if the str has \n character and return 1 if it does, else 0
 // int	has_new_line(char *str)
@@ -147,33 +147,7 @@ char	*copy_n_shift(char *buffer)
 	return (line_part);
 }
 
-// Function to extract the rest part of the next line with buffer as array
-char	*extract_rest(char *next_line, char *buffer, int fd)
-{
-	ssize_t	bytes_read;
-	char	*line_part;
-	char	*joined_line;
-
-	while (next_line[line_length(next_line) - 1] != '\n')
-	{
-		bytes_read = read(fd, buffer, BUFFER_SIZE);
-		if (bytes_read < 0)
-			return (free(next_line), NULL);
-		else if (bytes_read == 0)
-			return (next_line);
-		buffer[bytes_read] = '\0';
-		line_part = copy_n_shift(buffer);
-		if (!line_part)
-			return (free(next_line), NULL);
-		joined_line = join_parts(next_line, line_part);
-		if (!joined_line)
-			return (free(next_line), free(line_part), NULL);
-		next_line = joined_line;
-	}
-	return (next_line);
-}
-
-// // Function to extract the rest part of the next line with calloc'd buffer
+// // Function to extract the rest part of the next line with buffer as array
 // char	*extract_rest(char *next_line, char *buffer, int fd)
 // {
 // 	ssize_t	bytes_read;
@@ -186,10 +160,7 @@ char	*extract_rest(char *next_line, char *buffer, int fd)
 // 		if (bytes_read < 0)
 // 			return (free(next_line), NULL);
 // 		else if (bytes_read == 0)
-// 		{
-// 			// free(buffer);
-// 			return (next_line);	// Check that everything is freed correctly in this case where the last long line is read and returned and EOF is reached before encountering \n character
-// 		}
+// 			return (next_line);
 // 		buffer[bytes_read] = '\0';
 // 		line_part = copy_n_shift(buffer);
 // 		if (!line_part)
@@ -201,3 +172,32 @@ char	*extract_rest(char *next_line, char *buffer, int fd)
 // 	}
 // 	return (next_line);
 // }
+
+// Function to extract the rest part of the next line with calloc'd buffer
+char	*extract_rest(char *next_line, char *buffer, int fd)
+{
+	ssize_t	bytes_read;
+	char	*line_part;
+	char	*joined_line;
+
+	while (next_line[line_length(next_line) - 1] != '\n')
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (free(next_line), NULL);
+		else if (bytes_read == 0)
+		{
+			// free(buffer);
+			return (next_line);	// Check that everything is freed correctly in this case where the last long line is read and returned and EOF is reached before encountering \n character
+		}
+		buffer[bytes_read] = '\0';
+		line_part = copy_n_shift(buffer);
+		if (!line_part)
+			return (free(next_line), NULL);
+		joined_line = join_parts(next_line, line_part);
+		if (!joined_line)
+			return (free(next_line), free(line_part), NULL);
+		next_line = joined_line;
+	}
+	return (next_line);
+}

@@ -6,7 +6,7 @@
 #    By: pamatya <pamatya@student.42heilbronn.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/11 14:30:19 by pamatya           #+#    #+#              #
-#    Updated: 2024/05/07 18:34:18 by pamatya          ###   ########.fr        #
+#    Updated: 2024/05/08 14:43:17 by pamatya          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,13 +45,13 @@ $(NAME): $(OBJS)
 # $(FT):
 # 	$(MAKE) -C $(FTDIR) all
 
-# bonus: $(BONUS)
-# 	@echo ">>Executed make all"
-# 	$(CC) $(CFLAGS) $(BONUS) $(CURRENT).c -o $(CURRENT)_bonus
-# 	@./$(CURRENT)_bonus
+bonus: $(BONUS)
+	@echo ">>Executed make all"
+	$(CC) $(CFLAGS) $(BONUS) $(CURRENT).c -o $(CURRENT)_bonus
+	@./$(CURRENT)_bonus
 
-# $(BONUS): $(OBJ_BON)
-# 	@ar rcs $(BONUS) $(OBJ_BON)
+$(BONUS): $(OBJ_BON)
+	@ar rcs $(BONUS) $(OBJ_BON)
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@

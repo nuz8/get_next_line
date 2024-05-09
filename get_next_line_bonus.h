@@ -16,20 +16,15 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# include "./Libft/libft.h"
-# include <fcntl.h>
-# include <stdio.h>
 # ifndef BUFFER_SIZE
-#	define BUFFER_SIZE 1
+#	define BUFFER_SIZE 42
 # endif
 
 char	*get_next_line(int fd);
 
-void	*ft_calloc(size_t count, size_t size);
-char	*copy_n_shift(char *buffer);
-char	*extract_rest(char *next_line, char *buffer, int fd);
 size_t	line_length(char *str);
 char	*join_parts(char *s1, char *s2);
-
+char	*copy_n_shift(char *buffer);
+char	*extract_rest(char *next_line, char *buffer, int fd);
 
 #endif

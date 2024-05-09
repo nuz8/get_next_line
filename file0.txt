@@ -1,6 +1,0 @@
-Hello world! It's me...
-This is a file with multiple lines.
-Did you read it correctly?
-And what about this one -> !@#$%^&*()_+ ?
-Let me know 1ce you did...
-Peace out!
